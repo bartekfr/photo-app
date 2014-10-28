@@ -15,11 +15,6 @@ module.exports = function(config) {
 			'src/**/*.js',
 			'test/**/*.js'
 		],
-		// list of files to exclude
-		exclude: [
-
-		],
-
 		// test results reporter to use
 		// possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],
