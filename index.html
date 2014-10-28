@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 ie6-8 ie6-7" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 ie6-8 ie6-7" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie6-8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en" ><!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<title>Angular app</title>
+<link href="dist/css/main.css" rel="stylesheet" />
+</head>
+<body ng-app="photoApp">
+	<div ng-controller="mainController">
+		{{appName | capitalize}}
+	</div>
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="dist/js/common.min.js"></script>
+	<script type="text/javascript" src="dist/js/app.min.js"></script>
+</body>
+</html>
+

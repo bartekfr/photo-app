@@ -1,0 +1,18 @@
+{
+  "name": "SampleGrunt",
+  "version": "0.1.0",
+  "author": "Bartek Fryzowicz",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "^0.9.0",
+    "grunt-sass": "^0.16.0",
+    "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-jasmine": "^0.1.5",
+    "matchdep": "*"
+  }
+}
