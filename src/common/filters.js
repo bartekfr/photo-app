@@ -9,4 +9,4 @@ angular.module("filters", [])
 		}
 		return convert_case(input);
 	};
-})
+});

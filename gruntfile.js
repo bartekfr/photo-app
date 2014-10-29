@@ -2,21 +2,27 @@ module.exports = function(grunt){
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
+		pkg: grunt.file.readJSON("package.json"),
+		src: "src/",
+		dist: "dist",
 		watch: {
 			csscommon: {
-				files: ['src/sass/*.scss'],
-				tasks: ['compass']
+				files: ["<%= src %>/sass/*.scss"],
+				tasks: ["compass"]
 			},
-			jsapp: {
-				files: ['src/app/**/*.js', 'src/common/**/*.js'],
-				tasks: ['uglify:app']
+			appjs: {
+				files: ["<%= src %>/**/*.js"],
+				tasks: ["uglify:app", "jshint"]
+			},
+			tplmin: {
+				files: ["<%= src %>/app/**/*.html"],
+				tasks: ["htmlmin"]
 			}
 		},
 		compass: {
 			options: {
-				sassDir: "src/sass",
-				cssDir: "dist/css",
+				sassDir: "<%= src %>/sass",
+				cssDir: "<%= dist %>/css",
 				outputStyle: "compressed",
 				noLineComments: true,
 				cache: false,
@@ -30,19 +36,48 @@ module.exports = function(grunt){
 			},
 			app: {
 				files: [
-					{src: 'src/app/**/*.js', dest: 'dist/js/app.min.js'},
-					{src: 'src/common/**/*.js', dest: 'dist/js/common.min.js'}
+					{src: "<%= src %>/app/**/*.js", dest: "<%= dist %>/js/app.min.js"},
+					{src: "<%= src %>/common/**/*.js", dest: "<%= dist %>/js/common.min.js"}
+				]
+			}
+		},
+		jshint: {
+			all: {
+				options: {
+					curly: true,
+					eqeqeq: true,
+					loopfunc: true,
+					eqnull: true,
+					browser: true,
+					globals: {
+						jQuery: "angular"
+					},
+				},
+				src: ["<%= src %>/**/*.js"]
+			}
+		},
+		htmlmin: {
+			dist: {
+				options: {
+					removeComments: true,
+					collapseWhitespace: true
+				},
+				files: [
+					{
+						expand: true,
+						cwd: "<%= src %>/app",
+						src: ["**/*.html"],
+						dest: "<%= dist %>/tpl"
+					}
 				]
 			}
 		},
 		karma: {
 			unit: {
-				configFile: 'karma.config.js'
+				configFile: "karma.config.js"
 			}
 		}
 	});
 
-	grunt.registerTask('default', []);
-
-	//grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.registerTask("default", ["compass", "uglify", "htmlmin", "jshint", "karma"]);
 }
