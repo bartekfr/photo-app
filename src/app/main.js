@@ -1,4 +1,4 @@
-angular.module("photoApp", [
+angular.module("reportsApp", [
 	"ui.router",
 	"ngResource",
 	"filters",
