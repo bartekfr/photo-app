@@ -1,5 +1,6 @@
 angular.module("photoApp", [
 	"ui.router",
+	"ngResource",
 	"filters",
 	"services",
 	"home",
@@ -13,7 +14,9 @@ angular.module("photoApp", [
 			url: "/home",
 			templateUrl: "dist/tpl/home/home.html",
 			resolve: {
-				images: "imagesResources"
+				reports: ["reportsResource", function(reportsResource) {
+					return reportsResource.query();
+				}]
 			},
 			controller: "homeCtrl",
 			data: {
@@ -21,9 +24,15 @@ angular.module("photoApp", [
 			}
 		})
 		.state('item', {
-			url: "/item",
+			url: "/item/:id",
 			templateUrl: "dist/tpl/item/item.html",
 			controller: "itemCtrl",
+			resolve: {
+				report: ["reportsResource", "$stateParams", function(reportsResource, $stateParams) {
+					var id = $stateParams.id;
+					return reportsResource.get({id: id});
+				}]
+			},
 			data: {
 				title: "Item page"
 			}

@@ -1,1 +1,5 @@
-﻿<div ng-repeat="image in images">{{image.title}}</div>
+﻿<ul class="list-group">
+	<li class="list-group-item" ng-repeat="report in reports">
+		<a ui-sref="item({id: report._id.$oid})" >{{report.title}}</a>
+	</li>
+</ul>

@@ -79,5 +79,5 @@ module.exports = function(grunt){
 		}
 	});
 
-	grunt.registerTask("default", ["compass", "uglify", "htmlmin", "jshint", "karma"]);
+	grunt.registerTask("default", ["compass", "jshint", "uglify", "htmlmin", "karma"]);
 }

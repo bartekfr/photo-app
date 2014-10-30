@@ -1,17 +1,7 @@
 angular.module("services", [])
-.factory('imagesResources',["$timeout", function($timeout) {
-	var photos = [
-		{
-			title: "Picture 1"
-		},
-		{
-			title: "Picture 2"
-		}
-	];
-
-	//fake ajax request delay
-	var fakePromise = $timeout(function() {
-		return photos;
-	}, 1000);
-	return fakePromise;
+.factory("reportsResource", ["$timeout", "$resource", function($timeout, $resource) {
+	return $resource("https://api.mongolab.com/api/1/databases/reportsdb/collections/reports/:id", {
+		apiKey: "qUxqL9tqS3G-MbTZLJgdH8Ob4e1Yve_p",
+		id: "@_id.$oid"
+	});
 }]);

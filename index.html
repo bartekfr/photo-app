@@ -9,14 +9,19 @@
 <link href="dist/css/main.css" rel="stylesheet" />
 </head>
 <body ng-app="photoApp">
-	<div class="container" >
-		<a ui-sref="home">Home</a>
-		<a ui-sref="item">Item</a>
+	<div class="container">
+		<ul class="nav nav-pills">
+			<li>
+				<a ui-sref="home">Home</a>
+			</li>
+		</ul>
+
 		<h1>{{$state.current.data.title}}</h1>
 		<div ui-view>Loading...</div>
 	</div>
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
 	<script type="text/javascript" src="dist/js/common.min.js"></script>
 	<script type="text/javascript" src="dist/js/app.min.js"></script>
 </body>
