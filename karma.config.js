@@ -5,13 +5,15 @@ module.exports = function(config) {
 	config.set({
 		// base path, that will be used to resolve files and exclude
 		basePath: '',
-		plugins: ['karma-jasmine', 'karma-chrome-launcher'],
+		plugins: ['karma-jasmine', 'karma-phantomjs-launcher'],
 		// frameworks to use
 		frameworks: ['jasmine'],
 		// list of files / patterns to load in the browser
 		files: [
 			'bower_components/angular/angular.js',
 			'bower_components/angular-mocks/angular-mocks.js',
+			'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+			'bower_components/angular-resource/angular-resource.min.js',
 			'src/**/*.js',
 			'test/**/*.js'
 		],
@@ -35,7 +37,7 @@ module.exports = function(config) {
 		// - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
 		// - PhantomJS
 		// - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-		browsers: ['Chrome'],
+		browsers: ['PhantomJS'],
 		// If browser does not capture in given timeout [ms], kill it
 		captureTimeout: 60000,
 		// Continuous Integration mode
