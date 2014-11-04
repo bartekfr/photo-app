@@ -2,6 +2,7 @@ angular.module("reportsApp", [
 	"ui.router",
 	"ngResource",
 	"filters",
+	"directives",
 	"services",
 	"home",
 	"item"
@@ -30,11 +31,12 @@ angular.module("reportsApp", [
 			resolve: {
 				report: ["reportsResource", "$stateParams", function(reportsResource, $stateParams) {
 					var id = $stateParams.id;
-					return reportsResource.get({id: id});
+					return true;  //block http request TODO: remove it
+					//return reportsResource.get({id: id});
 				}]
 			},
 			data: {
-				title: "Item page"
+				title: "Month report"
 			}
 		});
 }])

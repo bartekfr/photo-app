@@ -1,1 +1,46 @@
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
+
+/* d3
+==================================================================== */
+
+/*bar chart
+----------------------------*/
+.chart {
+	.bar {
+		fill: lightBlue;
+		transition: fill 0.5s;
+
+		&:hover {
+			fill: #A52A2A;
+		}
+	}
+
+	.tick line {
+		stroke: lightGrey;
+		opacity: 0.4;
+	}
+
+	.axis {
+		text {
+			font: 10px sans-serif;
+			fill: #000;
+		}
+	}
+
+	.grid,
+	.axis {
+		path,
+		line {
+			fill: none;
+			stroke: #000;
+			shape-rendering: crispEdges;
+		}
+	}
+
+	.line {
+		fill: none;
+		stroke: #000;
+	}
+}
+
+
