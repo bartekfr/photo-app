@@ -16,7 +16,11 @@ module.exports = function(grunt){
 			},
 			tplmin: {
 				files: ["<%= src %>/app/**/*.html"],
-				tasks: ["htmlmin"]
+				tasks: ["htmlmin:app"]
+			},
+			directivetplmin: {
+				files: ["<%= src %>/common/**/*.html"],
+				tasks: ["htmlmin:dir"]
 			}
 		},
 		compass: {
@@ -57,17 +61,27 @@ module.exports = function(grunt){
 			}
 		},
 		htmlmin: {
-			dist: {
-				options: {
-					removeComments: true,
-					collapseWhitespace: true
-				},
+			options: {
+				removeComments: true,
+				collapseWhitespace: true
+			},
+			app: {
 				files: [
 					{
 						expand: true,
 						cwd: "<%= src %>/app",
 						src: ["**/*.html"],
 						dest: "<%= dist %>/tpl"
+					}
+				]
+			},
+			dir: {
+				files: [
+					{
+						expand: true,
+						cwd: "<%= src %>/common/templates",
+						src: ["**/*.html"],
+						dest: "<%= dist %>/tpl/directives"
 					}
 				]
 			}

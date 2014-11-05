@@ -1,9 +1,23 @@
 describe('services', function() {
 
-	var responseData, backend;
+	var responseData, backend, MONGOLAB_CONFIG;
+
+
+
+	beforeEach(module("ngResource"));
 
 	beforeEach(module("services"));
-	beforeEach(module("ngResource"));
+
+	beforeEach(function() {
+		MONGOLAB_CONFIG = {
+			DB_NAME: 'reportsdb',
+			API_KEY: 'qUxqL9tqS3G-MbTZLJgdH8Ob4e1Yve_p'
+		}
+
+		module(function ($provide) {
+			$provide.constant('MONGOLAB_CONFIG', MONGOLAB_CONFIG);
+		});
+	});
 
 	beforeEach(angular.mock.inject(function($httpBackend) {
 		backend = $httpBackend;
@@ -20,8 +34,12 @@ describe('services', function() {
 		])
 	}));
 
-	beforeEach(angular.mock.inject(function(reportsResource) {
-		responseData = reportsResource.query();
+
+
+
+	beforeEach(angular.mock.inject(function(reportsDbResource) {
+
+		responseData = reportsDbResource("reports").query();
 		backend.flush();
 	}));
 

@@ -1,7 +1,10 @@
 angular.module("services", [])
-.factory("reportsResource", ["$resource", function($resource) {
-	return $resource("https://api.mongolab.com/api/1/databases/reportsdb/collections/reports/:id", {
-		apiKey: "qUxqL9tqS3G-MbTZLJgdH8Ob4e1Yve_p",
-		id: "@_id.$oid"
-	});
+.factory("reportsDbResource", ["$resource", "MONGOLAB_CONFIG", function($resource, MONGOLAB_CONFIG) {
+
+	return function(collection) {
+		return $resource("https://api.mongolab.com/api/1/databases/reportsdb/collections/" + collection + "/:id", {
+			apiKey: MONGOLAB_CONFIG.API_KEY,
+			id: "@_id.$oid"
+		});
+	};
 }]);
