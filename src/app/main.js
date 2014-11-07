@@ -31,8 +31,8 @@ angular.module("reportsApp", [
 				title: "Home page"
 			}
 		})
-		.state('item', {
-			url: "/item/:id",
+		.state('report', {
+			url: "/report/:id",
 			templateUrl: "dist/tpl/item/item.html",
 			controller: "itemCtrl",
 			resolve: {

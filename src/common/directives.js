@@ -141,14 +141,14 @@ angular.module("directives", [])
 				if(value.length) {
 					draw();
 				}
-			});
+			}, true);
 
 			scope.$watch("chartType", function(value) {
-				element.find("svg").remove();
 				draw();
 			});
 
 			function draw() {
+				element.find("svg").remove();
 				drawChart(element[0], scope.data, {
 					type: scope.chartType,
 					width: attr.width,

@@ -1,7 +1,17 @@
+@import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap-compass';
+$icon-font-path: "";
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
-/* d3
+
+/* Generic
 ==================================================================== */
+a {
+	cursor: pointer;
+}
+
+h2 {
+	text-transform: capitalize;
+}
 
 .loading {
 	.content:after {
@@ -19,13 +29,39 @@
 	}
 }
 
+/* Home page
+==================================================================== */
+
 .reports-list {
 	text-transform: capitalize;
 }
 
-h2 {
-	text-transform: capitalize;
+
+/* Report page
+==================================================================== */
+.edit-data {
+	.form-group {
+		padding: 5px;
+	}
+
+	.buttons {
+		margin: 10px 0;
+		@include clearfix();
+
+		.glyphicon {
+			position: relative;
+			top: 3px;
+			font-size: 17px;
+		}
+	}
+
+	button {
+		float: right;
+	}
 }
+
+/* d3
+==================================================================== */
 
 /*bar chart
 ----------------------------*/

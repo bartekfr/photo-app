@@ -5,6 +5,11 @@ angular.module("services", [])
 		return $resource("https://api.mongolab.com/api/1/databases/reportsdb/collections/" + collection + "/:id", {
 			apiKey: MONGOLAB_CONFIG.API_KEY,
 			id: "@_id.$oid"
+		},
+		{
+			save: {
+				method: "PUT"
+			}
 		});
 	};
 }]);
