@@ -22,12 +22,22 @@ angular.module("directives", [])
 			xScale.rangeRoundBands([0, width], 0.1);
 		}
 
+		var yMin = d3.min(data, function(d) {
+				return d.value;
+			});
+		var yMax = d3.max(data, function(d) {
+				return d.value;
+			});
+
+		if(yMax < 0) {
+			yMax = 0;
+		}
+		if(yMin > 0) {
+			yMin = 0;
+		}
+
 		var yScale = d3.scale.linear()
-			.domain([d3.min(data, function(d) {
-				return d.value;
-			}), d3.max(data, function(d) {
-				return d.value;
-			})])
+			.domain([yMin, yMax])
 			.range([height, 0]);
 
 		//x and y axis
@@ -158,5 +168,42 @@ angular.module("directives", [])
 
 
 		}
+	};
+}])
+.directive("grid", [function() {
+	return {
+		restrict: "AE",
+		templateUrl: "dist/tpl/directives/data-grid-directive.html",
+		replace: true,
+		scope: {
+			report: "=sourceData",
+			toUpdate: "=update"
+		},
+		controller: ["$scope", function($scope) {
+			$scope.reportData = $scope.report.data;
+			$scope.save = function() {
+				$scope.report.data = $scope.reportData;
+				$scope.report.$save();
+			};
+
+			$scope.addRow = function() {
+				$scope.reportData.push({
+					"month": "",
+					"value": 0
+				});
+			};
+
+			$scope.remove = function(i) {
+				$scope.reportData.splice(i, 1);
+			};
+
+			$scope.revert = function() {
+				$scope.report.$get().then(function(response) {
+					$scope.toUpdate = response.data;
+					//update data used by other directive TODO: improve it!
+					$scope.reportData =response.data;
+				});
+			};
+		}]
 	};
 }]);
