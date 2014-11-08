@@ -18,4 +18,9 @@ angular.module("item", [])
 		$scope.reportData.splice(i, 1);
 	};
 
+	$scope.refresh = function() {
+		report.$get().then(function(response) {
+			$scope.reportData =response.data;
+		});
+	};
 }]);
