@@ -12,7 +12,7 @@ module.exports = function(grunt){
 			},
 			appjs: {
 				files: ["<%= src %>/**/*.js"],
-				tasks: ["uglify:app", "jshint"]
+				tasks: ["jshint", "uglify:app"]
 			},
 			tplmin: {
 				files: ["<%= src %>/app/**/*.html"],

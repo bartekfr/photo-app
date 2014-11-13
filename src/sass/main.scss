@@ -2,9 +2,11 @@
 $icon-font-path: "";
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
-
 /* Generic
 ==================================================================== */
+label {
+	margin-right: 5px;
+}
 
 input[type=number] {
 	-moz-appearance: textfield;
@@ -22,6 +24,8 @@ h2 {
 }
 
 .loading {
+	position: relative;
+
 	.content:after {
 		content: "Please wait...";
 		position: absolute;
@@ -37,6 +41,24 @@ h2 {
 	}
 }
 
+.buttons {
+	float: none;
+	margin: 10px 0;
+	@include clearfix();
+
+	a,
+	button {
+		display: inline-block;
+		margin-right: 5px;
+	}
+
+	.glyphicon {
+		position: relative;
+		top: 3px;
+		font-size: 17px;
+	}
+}
+
 /* Home page
 ==================================================================== */
 .main-nav {
@@ -45,57 +67,30 @@ h2 {
 
 .reports-list {
 	text-transform: capitalize;
+
+	.edit-link {
+		display: inline-block;
+		margin-left: 20px;
+		color: #bbb;
+	}
 }
 
 
 /* Report page
 ==================================================================== */
 .edit-data {
-	.edit-row {
-		@include clearfix();
-	}
-
-	.form-group {
-		float: left;
-		padding: 5px;
-
-		&.month {
-			float: none;
-		}
-	}
-
-	input[type=number] {
-		max-width: 200px;
-	}
-
-
- 	.buttons {
-		margin: 10px 0;
-		@include clearfix();
-
-		a,
-		button {
-			display: inline-block;
-			margin-right: 5px;
-		}
-
-		.glyphicon {
-			position: relative;
-			top: 3px;
-			font-size: 17px;
+	.data-grid {
+		input[type=number] {
+			max-width: 200px;
 		}
 	}
 }
 
-/* d3
-==================================================================== */
-
-/*bar chart
+/* chart
 ----------------------------*/
+
 .chart {
-	label {
-		margin-right: 5px;
-	}
+	margin-top: 30px;
 
 	.bar {
 		fill: lightBlue;
@@ -137,14 +132,8 @@ h2 {
 	}
 }
 
-@media only screen and (min-width: 768px) {
-	.edit-data {
-		.edit-row {
-			.form-group {
-				float: none;
-			}
-		}
-	}
-}
+@media only screen and (min-width: 768px) {}
+
+
 
 

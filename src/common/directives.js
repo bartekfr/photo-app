@@ -70,7 +70,6 @@ angular.module("directives", [])
 			.style("text-anchor", "end")
 			.text("Billions of dollars");
 
-		///TODO: move drawing part to another function
 		if (isLine) {
 			//prepare path
 			var line = d3.svg.line()
@@ -165,8 +164,6 @@ angular.module("directives", [])
 					height: attr.height
 				});
 			}
-
-
 		}
 	};
 }])
@@ -199,8 +196,8 @@ angular.module("directives", [])
 
 			$scope.revert = function() {
 				$scope.report.$get().then(function(response) {
-					$scope.toUpdate = response.data;
 					//update data used by other directive TODO: improve it!
+					$scope.toUpdate = response.data;
 					$scope.reportData =response.data;
 				});
 			};

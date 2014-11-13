@@ -5,18 +5,24 @@ module.exports = function(config) {
 	config.set({
 		// base path, that will be used to resolve files and exclude
 		basePath: '',
-		plugins: ['karma-jasmine', 'karma-phantomjs-launcher'],
+		plugins: ['karma-jasmine', 'karma-phantomjs-launcher', 'karma-ng-html2js-preprocessor'],
 		// frameworks to use
 		frameworks: ['jasmine'],
 		// list of files / patterns to load in the browser
 		files: [
+			'bower_components/jquery/dist/jquery.min.js',
 			'bower_components/angular/angular.js',
 			'bower_components/angular-mocks/angular-mocks.js',
 			'bower_components/angular-ui-router/release/angular-ui-router.min.js',
 			'bower_components/angular-resource/angular-resource.min.js',
+			'bower_components/d3/d3.min.js',
+			'dist/tpl/**/*.html',
 			'src/**/*.js',
 			'test/**/*.js'
 		],
+		preprocessors: {
+    		'dist/tpl/**/*.html':['ng-html2js']
+        },
 		// test results reporter to use
 		// possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],

@@ -5,7 +5,8 @@ angular.module("reportsApp", [
 	"directives",
 	"services",
 	"home",
-	"item"
+	"report",
+	"admin"
 ])
 .constant('MONGOLAB_CONFIG', {
 	DB_NAME: 'reportsdb',
@@ -33,8 +34,8 @@ angular.module("reportsApp", [
 		})
 		.state('report', {
 			url: "/report/:id",
-			templateUrl: "dist/tpl/item/item.html",
-			controller: "itemCtrl",
+			templateUrl: "dist/tpl/report/report.html",
+			controller: "reportCtrl",
 			resolve: {
 				report: ["reportsCollection", "$stateParams", function(reportsCollection, $stateParams) {
 					var id = $stateParams.id;
@@ -45,7 +46,40 @@ angular.module("reportsApp", [
 			data: {
 				title: "Month report"
 			}
+		})
+		//edit mode states
+		.state('admin', {
+			url: "/admin",
+			templateUrl: "dist/tpl/admin/admin.html",
+			controller: "adminCtrl"
+		})
+		.state('admin.add', {
+			url: "/add",
+			templateUrl: "dist/tpl/admin/add.html",
+			controller: "addCtrl",
+			resolve: {
+				reports: "reportsCollection"
+			},
+			data: {
+				title: "Add new report:)"
+			}
+		})
+		.state('admin.edit', {
+			url: "/edit/:id",
+			templateUrl: "dist/tpl/admin/edit.html",
+			controller: "editCtrl",
+			resolve: {
+				report: ["reportsCollection", "$stateParams", function(reportsCollection, $stateParams) {
+					var id = $stateParams.id;
+					//return true;  //block http request TODO: remove it
+					return reportsCollection.get({id: id}).$promise;
+				}]
+			},
+			data: {
+				title: "Edit report data"
+			}
 		});
+
 }])
 .run([ '$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	$rootScope.$state = $state;

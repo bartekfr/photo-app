@@ -1,0 +1,29 @@
+<div class="content">
+	<div class="panel panel-default edit-data">
+		<div class="panel-heading">Report data <a ui-sref="admin.edit({id: report._id.$oid})">(edit report)</a></div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Month</th>
+							<th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in reportData">
+							<td class="form-group month">
+								{{item.month}}
+							</td>
+							<td class="form-group value">
+								{{item.value}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<chart class="chart" data-width="550" data-height="300" source-data='reportData'></chart>
+		</div>
+	</div>
+</div>
+

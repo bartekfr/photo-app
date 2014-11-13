@@ -2,5 +2,13 @@
 <ul class="reports-list list-group">
 	<li class="list-group-item" ng-repeat="report in reports">
 		<a ui-sref="report({id: report._id.$oid})" >{{report.title}}</a>
+		<a class="edit-link" ui-sref="admin.edit({id: report._id.$oid})">
+			<span class="glyphicon glyphicon-edit"></span> edit
+		</a>
 	</li>
 </ul>
+<div class="buttons">
+		<a ui-sref="admin.add">
+			<span class="glyphicon glyphicon-plus-sign"></span> Add report
+		</a>
+</div>

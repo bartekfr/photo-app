@@ -1,11 +1,8 @@
-describe('services', function() {
+describe('services:mongolab resources', function() {
 
 	var responseData, backend, MONGOLAB_CONFIG;
 
-
-
 	beforeEach(module("ngResource"));
-
 	beforeEach(module("services"));
 
 	beforeEach(function() {
@@ -33,9 +30,6 @@ describe('services', function() {
 			}
 		])
 	}));
-
-
-
 
 	beforeEach(angular.mock.inject(function(reportsDbResource) {
 
