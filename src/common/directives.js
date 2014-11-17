@@ -147,6 +147,7 @@ angular.module("directives", [])
 			scope.chartType = scope.chartTypes[1];
 			scope.$watch("data", function(value) {
 				scope.data = value;
+				element.find("svg").remove();
 				if(value.length) {
 					draw();
 				}
@@ -158,6 +159,9 @@ angular.module("directives", [])
 
 			function draw() {
 				element.find("svg").remove();
+				if(!scope.data.length) {
+					return false;
+				}
 				drawChart(element[0], scope.data, {
 					type: scope.chartType,
 					width: attr.width,
@@ -177,13 +181,18 @@ angular.module("directives", [])
 			toUpdate: "=update"
 		},
 		controller: ["$scope", function($scope) {
-			$scope.reportData = $scope.report.data;
+			$scope.reportData = angular.copy($scope.report.data);
 			$scope.save = function() {
 				$scope.report.data = $scope.reportData;
-				$scope.report.$save();
+				$scope.$emit('requestSent', "Sending request...");
+				$scope.report.$update(function() {
+					$scope.editReport.$setPristine();
+					$scope.$emit('requestSent', "Report data saved");
+				});
 			};
 
 			$scope.addRow = function() {
+				$scope.editReport.$setDirty();
 				$scope.reportData.push({
 					"month": "",
 					"value": 0
@@ -192,13 +201,16 @@ angular.module("directives", [])
 
 			$scope.remove = function(i) {
 				$scope.reportData.splice(i, 1);
+				$scope.editReport.$setDirty();
 			};
 
 			$scope.revert = function() {
+				$scope.$emit('requestSent', "Sending request...");
 				$scope.report.$get().then(function(response) {
-					//update data used by other directive TODO: improve it!
 					$scope.toUpdate = response.data;
-					$scope.reportData =response.data;
+					$scope.reportData = response.data;
+					$scope.editReport.$setPristine();
+					$scope.$emit('requestSent', "Report data restored from database");
 				});
 			};
 		}]

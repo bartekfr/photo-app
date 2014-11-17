@@ -6702,6 +6702,10 @@ label {
   margin-right: 5px;
 }
 
+.form-group label {
+  margin-right: 0;
+}
+
 input[type=number] {
   -moz-appearance: textfield;
 }
@@ -6776,11 +6780,20 @@ h2 {
 .edit-data .data-grid input[type=number] {
   max-width: 200px;
 }
+.edit-data .form .ng-dirty {
+  border: 1px solid red;
+}
+.edit-data .form.ng-pristine .revert {
+  display: none;
+}
 
 /* chart
 ----------------------------*/
 .chart {
   margin-top: 30px;
+}
+.chart label {
+  margin-right: 5px;
 }
 .chart .bar {
   fill: lightBlue;

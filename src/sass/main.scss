@@ -8,6 +8,10 @@ label {
 	margin-right: 5px;
 }
 
+.form-group label {
+	margin-right: 0;
+}
+
 input[type=number] {
 	-moz-appearance: textfield;
 }
@@ -84,6 +88,19 @@ h2 {
 			max-width: 200px;
 		}
 	}
+
+	.form {
+		.ng-dirty {
+			border:1px solid red;
+		}
+
+		&.ng-pristine {
+			.revert {
+				display: none;
+			}
+		}
+	}
+
 }
 
 /* chart
@@ -91,6 +108,10 @@ h2 {
 
 .chart {
 	margin-top: 30px;
+
+	label {
+		margin-right: 5px;
+	}
 
 	.bar {
 		fill: lightBlue;

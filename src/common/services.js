@@ -7,7 +7,7 @@ angular.module("services", [])
 			id: "@_id.$oid"
 		},
 		{
-			save: {
+			update: {
 				method: "PUT"
 			}
 		});

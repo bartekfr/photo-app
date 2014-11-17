@@ -1,5 +1,5 @@
 ﻿<div>
-	<form novalidate class="data-grid">
+	<form novalidate class="data-grid form" name="editReport">
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -25,10 +25,10 @@
 			</table>
 		</div>
 		<div class="buttons">
-			<a ng-click="addRow()">
+			<a class="add" ng-click="addRow()">
 				<span class="glyphicon glyphicon-plus-sign"></span> Add
 			</a>
-			<a ng-click="revert()">
+			<a class="revert" ng-click="revert()">
 				<span class="glyphicon glyphicon-refresh"></span> Revert
 			</a>
 			<button class="btn btn-primary btn-sm" ng-click="save()" type="submit">save</button>
