@@ -13,7 +13,7 @@ angular.module("services", [])
 		});
 	};
 }])
-.factory("authenticate", ["$http", "$q", function($http, $q) {
+.factory("authenticate", ["$http", "$q", "$state", "$rootScope", function($http, $q, $state, $rootScope) {
 
 	return {
 		login: function() {
@@ -22,14 +22,20 @@ angular.module("services", [])
 			if(localStorage.getItem("token") === null) {
 				OAuth.popup('google').done(function(result) {
 					localStorage.setItem("token", result.access_token);
+					$rootScope.$apply(function() {
+						$rootScope.logged = true;
+					});
 					res.resolve(true);
+					console.log("log in");
+				}).fail(function() {
+					console.log("cannot log in");
 				});
 			}
-
 			return res.promise;
 		},
 		logout: function() {
 			localStorage.removeItem("token");
+			$rootScope.logged = false;
 		},
 		validateToken: function() {
 			return $http.get("https://www.googleapis.com/oauth2/v1/tokeninfo", {

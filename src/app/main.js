@@ -52,6 +52,16 @@ angular.module("reportsApp", [
 			url: "/admin",
 			templateUrl: "dist/tpl/admin/admin.html",
 			controller: "adminCtrl",
+			resolve: {
+				token: ["authenticate", function(authenticate) {
+					var validated = authenticate.validateToken();
+					validated.error(function() {
+						console.log("bad token");
+						authenticate.logout();
+					});
+					return validated;
+				}]
+			},
 			data: {
 				restricted: true
 			}
@@ -100,30 +110,37 @@ angular.module("reportsApp", [
 				event.preventDefault();
 				body.classList.remove("loading");
 				$state.go("home");
+				console.log("no token, back home");
 			}
 		}
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.remove("loading");
+		console.log("change state");
 	});
 
 	$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.remove("loading");
+		console.log("change state error");
 	});
 }])
-.controller("main", ["$scope", "$state", "authenticate", function($scope, $state, authenticate) {
+.controller("main", ["$scope", "$state", "authenticate", "$timeout", "$rootScope", function($scope, $state, authenticate, $timeout, $rootScope) {
 	//TODO: service for handling authentication
-	$scope.logged = localStorage.getItem("token") !== null;
+	$rootScope.logged = localStorage.getItem("token") !== null;
 	$scope.logout = function() {
 		authenticate.logout();
-		$state.go("home");
-		$scope.logged = false;
 	};
 	$scope.login = function() {
-		var res = authenticate.login();
-		res.then(function() {
-			$scope.logged = true;
-		});
+		 authenticate.login();
 	};
+
+	$scope.$on('requestSent', function(e, msg) {
+		$scope.message = msg;
+
+		//UGLY, temporrary way to show message only for a moment, TODO: use angular animations
+		$timeout(function() {
+			$scope.message = "";
+		}, 3000);
+	});
 }]);

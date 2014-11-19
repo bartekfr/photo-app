@@ -16,15 +16,16 @@
 					<a ui-sref="home">Home</a>
 				</li>
 				<li>
-					<a ng-click="logout()">Logout</a>
+					<a ng-show="logged" ng-click="logout()">Logout</a>
 				</li>
 				<li>
-					<a ng-click="login()">Login</a>
+					<a ng-hide="logged" ng-click="login()">Login</a>
 				</li>
 			</ul>
 		</nav>
 		<div class="page-header">
 			<h1>{{$state.current.data.title}}</h1>
+			<div class="message">{{message}}</div>
 		</div>
 		<div class="content" ui-view>Loading...</div>
 	</div>

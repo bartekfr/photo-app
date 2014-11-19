@@ -1,13 +1,5 @@
 angular.module("admin", [])
-.controller("adminCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
-	$scope.$on('requestSent', function(e, msg) {
-		$scope.message = msg;
-
-		//UGLY, temporrary way to show message only for a moment, TODO: use angular animations
-		$timeout(function() {
-			$scope.message = "";
-		}, 3000);
-	});
+.controller("adminCtrl", ["$scope", function ($scope) {
 }])
 .controller("addCtrl", ["$scope", "reports", function ($scope, reports) {
 	$scope.report = {
