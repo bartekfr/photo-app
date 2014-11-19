@@ -4,16 +4,22 @@
 <!--[if IE 8]><html class="no-js ie8 ie6-8" lang="en"><![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en" ><!--<![endif]-->
 <head>
-<meta charset="utf-8" />
-<title>Angular app</title>
-<link href="dist/css/main.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+	<title>Angular app</title>
+	<link href="dist/css/main.css" rel="stylesheet" />
 </head>
 <body ng-app="reportsApp">
-	<div class="container">
+	<div class="container" ng-controller="main">
 		<nav class="main-nav">
 			<ul class="nav nav-pills">
 				<li>
 					<a ui-sref="home">Home</a>
+				</li>
+				<li>
+					<a ng-click="logout()">Logout</a>
+				</li>
+				<li>
+					<a ng-click="login()">Login</a>
 				</li>
 			</ul>
 		</nav>
@@ -23,6 +29,7 @@
 		<div class="content" ui-view>Loading...</div>
 	</div>
 	<script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
+	<script type="text/javascript" src="bower_components/oauth-js/dist/oauth.js"></script>
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>

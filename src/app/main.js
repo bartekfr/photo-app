@@ -15,7 +15,7 @@ angular.module("reportsApp", [
 .factory("reportsCollection", ["reportsDbResource", function(reportsDbResource) {
 	return reportsDbResource("reports");
 }])
-.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+.config(["$stateProvider", "$locationProvider", "$urlRouterProvider", function($stateProvider, $locationProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/home");
 	// Now set up the states
 	$stateProvider
@@ -51,7 +51,10 @@ angular.module("reportsApp", [
 		.state('admin', {
 			url: "/admin",
 			templateUrl: "dist/tpl/admin/admin.html",
-			controller: "adminCtrl"
+			controller: "adminCtrl",
+			data: {
+				restricted: true
+			}
 		})
 		.state('admin.add', {
 			url: "/add",
@@ -76,12 +79,13 @@ angular.module("reportsApp", [
 				}]
 			},
 			data: {
-				title: "Edit report data"
+				title: "Edit report data",
+				restricted: true
 			}
 		});
 
 }])
-.run([ '$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+.run([ '$rootScope', '$state', '$stateParams', "$http", "authenticate", function ($rootScope, $state, $stateParams, $http, authenticate) {
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
 
@@ -89,9 +93,37 @@ angular.module("reportsApp", [
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.add("loading");
+		var restricted = toState.data.restricted;
+
+		if(restricted) {
+			if(localStorage.getItem("token") === null) {
+				event.preventDefault();
+				body.classList.remove("loading");
+				$state.go("home");
+			}
+		}
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.remove("loading");
 	});
+
+	$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
+		body.classList.remove("loading");
+	});
+}])
+.controller("main", ["$scope", "$state", "authenticate", function($scope, $state, authenticate) {
+	//TODO: service for handling authentication
+	$scope.logged = localStorage.getItem("token") !== null;
+	$scope.logout = function() {
+		authenticate.logout();
+		$state.go("home");
+		$scope.logged = false;
+	};
+	$scope.login = function() {
+		var res = authenticate.login();
+		res.then(function() {
+			$scope.logged = true;
+		});
+	};
 }]);
