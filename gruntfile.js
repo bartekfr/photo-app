@@ -40,6 +40,7 @@ module.exports = function(grunt){
 		},
 		uglify: {
 			options: {
+				//beautify: true
 			},
 			app: {
 				files: [

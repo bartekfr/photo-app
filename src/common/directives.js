@@ -180,14 +180,14 @@ angular.module("directives", [])
 			report: "=sourceData",
 			toUpdate: "=update"
 		},
-		controller: ["$scope", function($scope) {
+		controller: ["$scope", "messenger", function($scope, messenger) {
 			$scope.reportData = angular.copy($scope.report.data);
 			$scope.save = function() {
 				$scope.report.data = $scope.reportData;
-				$scope.$emit('requestSent', "Sending request...");
+				messenger.log("Sending request...");
 				$scope.report.$update(function() {
 					$scope.editReport.$setPristine();
-					$scope.$emit('requestSent', "Report data saved");
+					messenger.log("Report data saved");
 				});
 			};
 
@@ -205,12 +205,12 @@ angular.module("directives", [])
 			};
 
 			$scope.revert = function() {
-				$scope.$emit('requestSent', "Sending request...");
+				messenger.log("Sending request...");
 				$scope.report.$get().then(function(response) {
 					$scope.toUpdate = response.data;
 					$scope.reportData = response.data;
 					$scope.editReport.$setPristine();
-					$scope.$emit('requestSent', "Report data restored from database");
+					messenger.log("Report data restored from database");
 				});
 			};
 		}]

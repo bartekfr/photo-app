@@ -13,36 +13,66 @@ angular.module("services", [])
 		});
 	};
 }])
-.factory("authenticate", ["$http", "$q", "$state", "$rootScope", function($http, $q, $state, $rootScope) {
-
+.factory("authenticate", ["$http", "$q", "$state", "$rootScope", "messenger", function($http, $q, $state, $rootScope, messenger) {
+	OAuth.initialize('eGdqaQpGexXG5mJQfD5W8ctPHq8');
 	return {
 		login: function() {
-			OAuth.initialize('eGdqaQpGexXG5mJQfD5W8ctPHq8');
 			var res = $q.defer();
 			if(localStorage.getItem("token") === null) {
-				OAuth.popup('google').done(function(result) {
+				OAuth.popup('google', {
+					cache: true
+				}).done(function(result) {
 					localStorage.setItem("token", result.access_token);
-					$rootScope.$apply(function() {
-						$rootScope.logged = true;
-					});
 					res.resolve(true);
-					console.log("log in");
 				}).fail(function() {
-					console.log("cannot log in");
+					messenger.log("cannot log in");
 				});
 			}
-			return res.promise;
+
+			var promise = res.promise;
+			promise.then(function(){
+				$rootScope.logged = true;
+				messenger.log("Logged in");
+			});
+			return promise;
 		},
 		logout: function() {
 			localStorage.removeItem("token");
+			// /OAuth.clearCache('google');
 			$rootScope.logged = false;
+			messenger.log("Logged out");
+			$state.go("home").then(function(state) {
+				//https://github.com/angular-ui/ui-router/issues/178
+				$rootScope.$broadcast('$stateChangeSuccess', state, null);
+			});
+		},
+		isLogged: function() {
+			return localStorage.getItem("token") !== null;
 		},
 		validateToken: function() {
+			var that = this;
 			return $http.get("https://www.googleapis.com/oauth2/v1/tokeninfo", {
 				params: {
 					access_token: localStorage.getItem("token")
 				}
+			})
+			.error(function() {
+				messenger.log("invalid token");
+				that.logout();
 			});
+		}
+	};
+}])
+.factory("messenger", ["$rootScope", "$timeout", function($rootScope, $timeout) {
+
+	return {
+		log: function(msg) {
+				//UGLY, temporrary way to show message only for a moment, TODO: use angular animations
+				$rootScope.message = msg;
+				$timeout(function() {
+					$rootScope.message = "";
+				}, 3000);
+
 		}
 	};
 }]);

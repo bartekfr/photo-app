@@ -54,12 +54,7 @@ angular.module("reportsApp", [
 			controller: "adminCtrl",
 			resolve: {
 				token: ["authenticate", function(authenticate) {
-					var validated = authenticate.validateToken();
-					validated.error(function() {
-						console.log("bad token");
-						authenticate.logout();
-					});
-					return validated;
+					return authenticate.validateToken();
 				}]
 			},
 			data: {
@@ -95,7 +90,7 @@ angular.module("reportsApp", [
 		});
 
 }])
-.run([ '$rootScope', '$state', '$stateParams', "$http", "authenticate", function ($rootScope, $state, $stateParams, $http, authenticate) {
+.run([ '$rootScope', '$state', '$stateParams', "$http", "authenticate", "messenger", function ($rootScope, $state, $stateParams, $http, authenticate, messenger) {
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
 
@@ -110,37 +105,26 @@ angular.module("reportsApp", [
 				event.preventDefault();
 				body.classList.remove("loading");
 				$state.go("home");
-				console.log("no token, back home");
+				messenger.log("no token, back home");
 			}
 		}
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.remove("loading");
-		console.log("change state");
 	});
 
 	$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
 		body.classList.remove("loading");
-		console.log("change state error");
+		messenger.log("change state error");
 	});
 }])
 .controller("main", ["$scope", "$state", "authenticate", "$timeout", "$rootScope", function($scope, $state, authenticate, $timeout, $rootScope) {
-	//TODO: service for handling authentication
-	$rootScope.logged = localStorage.getItem("token") !== null;
+	$rootScope.logged = authenticate.isLogged();
 	$scope.logout = function() {
 		authenticate.logout();
 	};
 	$scope.login = function() {
 		 authenticate.login();
 	};
-
-	$scope.$on('requestSent', function(e, msg) {
-		$scope.message = msg;
-
-		//UGLY, temporrary way to show message only for a moment, TODO: use angular animations
-		$timeout(function() {
-			$scope.message = "";
-		}, 3000);
-	});
 }]);

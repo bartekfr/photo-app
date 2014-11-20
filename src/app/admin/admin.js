@@ -11,11 +11,10 @@ angular.module("admin", [])
 		reports.save($scope.report);
 	};
 }])
-.controller("editCtrl", ["$scope", "report", "$state", function ($scope, report, $state) {
+.controller("editCtrl", ["$scope", "report", "$state", "messenger", function ($scope, report, $state, messenger) {
 	$scope.reportData = report.data;
 	$scope.title = report.title;
 	$scope.report = report;
-	$scope.message = "aaa";
 
 	$scope.remove = function() {
 		report.$delete(function() {
@@ -25,9 +24,9 @@ angular.module("admin", [])
 
 	$scope.saveProperties = function() {
 		report.title = $scope.title;
-		$scope.$emit('requestSent', "Sending request...");
+		messenger.log("Sending request");
 		report.$update(function() {
-			$scope.$emit('requestSent', "Report properties saved");
+			messenger.log("Report properties saved");
 		});
 	};
 }]);
