@@ -182,6 +182,7 @@ angular.module("directives", [])
 		},
 		controller: ["$scope", "messenger", function($scope, messenger) {
 			$scope.reportData = angular.copy($scope.report.data);
+			$scope.toUpdate = $scope.reportData;
 
 
 			$scope.$watch("editReport.$valid", function(value) {
@@ -213,8 +214,8 @@ angular.module("directives", [])
 			$scope.revert = function() {
 				messenger.log("Sending request...");
 				$scope.report.$get().then(function(response) {
-					$scope.toUpdate = response.data;
-					$scope.reportData = response.data;
+					$scope.reportData = angular.copy(response.data);
+					$scope.toUpdate = $scope.reportData;
 					$scope.editReport.$setPristine();
 					messenger.log("Report data restored from database");
 				});
