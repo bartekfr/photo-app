@@ -14,8 +14,8 @@
 						<td class="month">
 							<input class="input-sm" type="text" ng-model="item.month"/>
 						</td>
-						<td class=" value">
-							<input class="input-sm" type="number" ng-model="item.value"/>
+						<td class="value">
+							<div class="number-field" number ng-model="item.value" ng-step="10" max="400" min="-100"></div>
 						</td>
 						<td class="remove">
 							<a class="remove" ng-click="remove($index)"><span class="glyphicon glyphicon-remove"></span></a>
@@ -31,7 +31,7 @@
 			<a class="revert" ng-click="revert()">
 				<span class="glyphicon glyphicon-refresh"></span> Revert
 			</a>
-			<button class="btn btn-primary btn-sm" ng-click="save()" type="submit">save</button>
+			<button class="btn btn-primary btn-sm" ng-disabled="!canSave" ng-click="save()" type="submit">save</button>
 		</div>
 	</form>
 </div>

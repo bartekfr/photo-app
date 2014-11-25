@@ -80,7 +80,7 @@ h2 {
 }
 
 
-/* Report page
+/* admin
 ==================================================================== */
 .edit-data {
 	.data-grid {
@@ -90,8 +90,16 @@ h2 {
 	}
 
 	.form {
+		.number-field {
+			display: inline-block;
+		}
+
 		.ng-dirty {
-			border:1px solid red;
+			border:1px solid rgb(0, 255, 0);
+		}
+
+		.ng-invalid {
+			border:1px solid rgb(255, 0, 0);
 		}
 
 		&.ng-pristine {

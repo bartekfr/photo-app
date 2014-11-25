@@ -6775,12 +6775,18 @@ h2 {
   color: #bbb;
 }
 
-/* Report page
+/* admin
 ==================================================================== */
 .edit-data .data-grid input[type=number] {
   max-width: 200px;
 }
+.edit-data .form .number-field {
+  display: inline-block;
+}
 .edit-data .form .ng-dirty {
+  border: 1px solid lime;
+}
+.edit-data .form .ng-invalid {
   border: 1px solid red;
 }
 .edit-data .form.ng-pristine .revert {
