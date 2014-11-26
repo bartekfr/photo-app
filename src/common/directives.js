@@ -261,8 +261,8 @@ angular.module("directives", [])
 				model.$render();
 			}
 
-			model.$formatters.push(toInt);
 			model.$formatters.push(checkRange);
+			model.$formatters.push(toInt);
 			model.$parsers.push(toInt);
 			model.$parsers.push(checkRange);
 
