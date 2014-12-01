@@ -55,10 +55,15 @@ module.exports = function(grunt){
 					curly: true,
 					eqeqeq: true,
 					loopfunc: true,
+					undef: true,
 					eqnull: true,
 					browser: true,
 					globals: {
-						jQuery: "angular"
+						jQuery: true,
+						angular: true,
+						d3: true,
+						OAuth: true
+
 					},
 				},
 				src: ["<%= src %>/**/*.js"]

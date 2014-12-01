@@ -101,7 +101,7 @@ angular.module("directives", [])
 				.append("rect")
 				.attr("class", "bar")
 				.attr("y", function(d, i) {
-					value = d.value;
+					var value = d.value;
 					if(value >= 0) {
 						return yScale(value);
 					} else {
