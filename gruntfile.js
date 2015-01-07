@@ -95,6 +95,18 @@ module.exports = function(grunt){
 				]
 			}
 		},
+		"http-server": {
+			'dev': {
+				root: ".",
+				port: 8080,
+				host: "127.0.0.1",
+				cache: 1000,
+				showDir : true,
+				autoIndex: true,
+				ext: "html",
+				runInBackground: true
+			}
+		},
 		karma: {
 			unit: {
 				configFile: "karma.config.js"
@@ -103,4 +115,5 @@ module.exports = function(grunt){
 	});
 
 	grunt.registerTask("default", ["compass", "jshint", "uglify", "htmlmin", "karma"]);
+	grunt.registerTask("serve", ['http-server', "watch"]);
 }
