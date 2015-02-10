@@ -44,6 +44,34 @@ describe('directives:chart', function() {
 		expect(element.find(".bar").length).toEqual(1);
 	});
 });
+describe('directives:grid', function() {
+
+	var element, scope, isolatedScope;
+	beforeEach(module("services"));
+
+
+	beforeEach(module("directives", "dist/tpl/directives/data-grid-directive.html"));
+	beforeEach(angular.mock.inject(function($compile, $rootScope) {
+		var linkingFn = $compile('<div grid source-data="report" update="reportData"></div>');
+		scope = $rootScope;
+		scope.report = {"title" : "My expenses report" , "data" : [ { "month" : "january" , "value" : 500}, { "month" : "february" , "value" : -33}, { "month" : "march" , "value" : 50}, { "month" : "april" , "value" : 122}, { "month" : "june" , "value" : 175}]};
+		scope.reportData= null;
+		element = linkingFn(scope);
+		scope.$digest();
+		isolatedScope = element.isolateScope();
+	}));
+
+	it("Have row for each data object", function() {
+		expect(element.find(".edit-row").length).toEqual(5);
+		scope.report.data.push({ "month" : "december" , "value" : 400});
+	});
+	
+	it("Removes row", function() {
+		isolatedScope.remove(0);
+		isolatedScope.$digest();
+		expect(element.find(".edit-row").length).toEqual(4);
+	});
+});
 
 
 
