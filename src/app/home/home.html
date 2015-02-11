@@ -2,13 +2,13 @@
 <ul class="reports-list list-group">
 	<li class="list-group-item" ng-repeat="report in reports">
 		<a ui-sref="report({id: report._id.$oid})" >{{report.title}}</a>
-		<a class="edit-link" ng-show="logged" ui-sref="admin.report({id: report._id.$oid})">
+		<a class="edit-link" ng-show="logged" ui-sref="admin.report.edit({id: report._id.$oid})">
 			<span class="glyphicon glyphicon-edit"></span> edit
 		</a>
 	</li>
 </ul>
 <div class="buttons">
-	<a ui-sref="admin.addReport" ng-show="logged">
+	<a ui-sref="admin.report.add" ng-show="logged">
 		<span class="glyphicon glyphicon-plus-sign"></span> Add report
 	</a>
 </div>
@@ -16,13 +16,13 @@
 <ul class="reports-list list-group">
 	<li class="list-group-item" ng-repeat="calculation in calculations">
 		<a ui-sref="calculation({id: calculation._id.$oid})" >{{calculation.title}}</a>
-		<a class="edit-link" ng-show="logged" ui-sref="admin.calculation({id: calculation._id.$oid})">
+		<a class="edit-link" ng-show="logged" ui-sref="admin.calculation.edit({id: calculation._id.$oid})">
 			<span class="glyphicon glyphicon-edit"></span> edit
 		</a>
 	</li>
 </ul>
 <div class="buttons">
-	<a ui-sref="admin.addCalculation" ng-show="logged">
+	<a ui-sref="admin.calculation.add" ng-show="logged">
 		<span class="glyphicon glyphicon-plus-sign"></span> Add calculation sheet
 	</a>
 </div>

@@ -83,9 +83,14 @@ angular.module("reportsApp", [
 				restricted: true
 			}
 		})
-		//report admin
+		//report admin mode
 		.state('admin.report', {
-			url: "/report/:id",
+			url: "/report",
+			abstract: true,
+			template: "<ui-view/>",
+		})
+		.state('admin.report.edit', {
+			url: "/edit/:id",
 			templateUrl: "dist/tpl/admin/edit.html",
 			controller: "editCtrl",
 			resolve: {
@@ -97,11 +102,10 @@ angular.module("reportsApp", [
 			},
 			data: {
 				title: "Edit report data",
-				restricted: true
 			}
 		})
 		.state('admin.report.add', {
-			url: "/report/add",
+			url: "/add",
 			templateUrl: "dist/tpl/admin/add.html",
 			controller: "addCtrl",
 			resolve: {
@@ -111,10 +115,14 @@ angular.module("reportsApp", [
 				title: "Add new report:)"
 			}
 		})
-
-		//calculations admin
+		//calculations admin mode
 		.state('admin.calculation', {
-			url: "/calculation/:id",
+			url: "/calculation",
+			abstract: true,
+			template: "<ui-view/>",
+		})
+		.state('admin.calculation.edit', {
+			url: "/edit/:id",
 			templateUrl: "dist/tpl/admin/editCalculations.html",
 			controller: "editCtrl",
 			resolve: {
@@ -129,12 +137,12 @@ angular.module("reportsApp", [
 				restricted: true
 			}
 		})
-		.state('admin.calculations.add', {
-			url: "/calculations/add",
+		.state('admin.calculation.add', {
+			url: "/add",
 			templateUrl: "dist/tpl/admin/addCalculations.html",
 			controller: "addCtrl",
 			resolve: {
-				reports: "calculationssCollection"
+				reports: "calculationsCollection"
 			},
 			data: {
 				title: "Add new calculations:)"
