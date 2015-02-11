@@ -6,6 +6,7 @@ angular.module("reportsApp", [
 	"services",
 	"home",
 	"report",
+	"calculations",
 	"admin"
 ])
 .constant('MONGOLAB_CONFIG', {
@@ -14,6 +15,9 @@ angular.module("reportsApp", [
 })
 .factory("reportsCollection", ["reportsDbResource", function(reportsDbResource) {
 	return reportsDbResource("reports");
+}])
+.factory("calculationsCollection", ["reportsDbResource", function(reportsDbResource) {
+	return reportsDbResource("calculations");
 }])
 .config(["$stateProvider", "$locationProvider", "$urlRouterProvider", function($stateProvider, $locationProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/home");
@@ -25,6 +29,9 @@ angular.module("reportsApp", [
 			resolve: {
 				reports: ["reportsCollection", function(reports) {
 					return reports.query().$promise;
+				}],
+				calculations: ["calculationsCollection", function(calculationsCollection) {
+					return calculationsCollection.query().$promise;
 				}]
 			},
 			controller: "homeCtrl",
@@ -41,6 +48,21 @@ angular.module("reportsApp", [
 					var id = $stateParams.id;
 					//return true;  //block http request TODO: remove it
 					return reportsCollection.get({id: id}).$promise;
+				}]
+			},
+			data: {
+				title: "Month calculation"
+			}
+		})
+		.state('calculation', {
+			url: "/calculation/:id",
+			templateUrl: "dist/tpl/calculation/calculation.html",
+			controller: "calculationCtrl",
+			resolve: {
+				report: ["calculationsCollection", "$stateParams", function(calculationsCollection, $stateParams) {
+					var id = $stateParams.id;
+					//return true;  //block http request TODO: remove it
+					return calculationsCollection.get({id: id}).$promise;
 				}]
 			},
 			data: {
@@ -61,19 +83,9 @@ angular.module("reportsApp", [
 				restricted: true
 			}
 		})
-		.state('admin.add', {
-			url: "/add",
-			templateUrl: "dist/tpl/admin/add.html",
-			controller: "addCtrl",
-			resolve: {
-				reports: "reportsCollection"
-			},
-			data: {
-				title: "Add new report:)"
-			}
-		})
-		.state('admin.edit', {
-			url: "/edit/:id",
+		//report admin
+		.state('admin.report', {
+			url: "/report/:id",
 			templateUrl: "dist/tpl/admin/edit.html",
 			controller: "editCtrl",
 			resolve: {
@@ -86,6 +98,46 @@ angular.module("reportsApp", [
 			data: {
 				title: "Edit report data",
 				restricted: true
+			}
+		})
+		.state('admin.report.add', {
+			url: "/report/add",
+			templateUrl: "dist/tpl/admin/add.html",
+			controller: "addCtrl",
+			resolve: {
+				reports: "reportsCollection"
+			},
+			data: {
+				title: "Add new report:)"
+			}
+		})
+
+		//calculations admin
+		.state('admin.calculation', {
+			url: "/calculation/:id",
+			templateUrl: "dist/tpl/admin/editCalculations.html",
+			controller: "editCtrl",
+			resolve: {
+				report: ["calculationsCollection", "$stateParams", function(calculations, $stateParams) {
+					var id = $stateParams.id;
+					//return true;  //block http request TODO: remove it
+					return calculations.get({id: id}).$promise;
+				}]
+			},
+			data: {
+				title: "Edit calculations",
+				restricted: true
+			}
+		})
+		.state('admin.calculations.add', {
+			url: "/calculations/add",
+			templateUrl: "dist/tpl/admin/addCalculations.html",
+			controller: "addCtrl",
+			resolve: {
+				reports: "calculationssCollection"
+			},
+			data: {
+				title: "Add new calculations:)"
 			}
 		});
 

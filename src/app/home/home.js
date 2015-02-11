@@ -1,4 +1,5 @@
 angular.module("home", [])
-.controller("homeCtrl", ["$scope", "reports", function ($scope, reports) {
+.controller("homeCtrl", ["$scope", "reports", "calculations", function ($scope, reports, calculations) {
 	$scope.reports = reports;
+	$scope.calculations = calculations;
 }]);
