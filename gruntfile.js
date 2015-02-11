@@ -24,18 +24,18 @@ module.exports = function(grunt){
 			}
 		},
 		compass: {
-			options: {
-				httpPath: "/",
-				sassDir: "<%= src %>/sass",
-				cssDir: "<%= dist %>/css",
-				outputStyle: "expanded",
-				noLineComments: true,
-				cache: false,
-				relativeAssets: true,
-				fontsDir: "bower_components/bootstrap-sass-official/assets/fonts/bootstrap"
-				//sourcemap: true
-			},
 			dist: {
+				options: {
+					httpPath: "/",
+					sassDir: "<%= src %>/sass",
+					cssDir: "<%= dist %>/css",
+					outputStyle: 'compressed',
+					noLineComments: true,
+					cache: false,
+					relativeAssets: true,
+					fontsDir: "bower_components/bootstrap-sass-official/assets/fonts/bootstrap"
+					//sourcemap: true
+				}
 			}
 		},
 		uglify: {
