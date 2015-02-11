@@ -92,7 +92,7 @@ angular.module("reportsApp", [
 		.state('admin.report.edit', {
 			url: "/edit/:id",
 			templateUrl: "dist/tpl/admin/edit.html",
-			controller: "editCtrl",
+			controller: "reportEditCtrl",
 			resolve: {
 				report: ["reportsCollection", "$stateParams", function(reportsCollection, $stateParams) {
 					var id = $stateParams.id;
@@ -107,7 +107,7 @@ angular.module("reportsApp", [
 		.state('admin.report.add', {
 			url: "/add",
 			templateUrl: "dist/tpl/admin/add.html",
-			controller: "addCtrl",
+			controller: "reportAddCtrl",
 			resolve: {
 				reports: "reportsCollection"
 			},
@@ -124,7 +124,7 @@ angular.module("reportsApp", [
 		.state('admin.calculation.edit', {
 			url: "/edit/:id",
 			templateUrl: "dist/tpl/admin/editCalculations.html",
-			controller: "editCtrl",
+			controller: "calculationEditCtrl",
 			resolve: {
 				report: ["calculationsCollection", "$stateParams", function(calculations, $stateParams) {
 					var id = $stateParams.id;
@@ -140,7 +140,7 @@ angular.module("reportsApp", [
 		.state('admin.calculation.add', {
 			url: "/add",
 			templateUrl: "dist/tpl/admin/addCalculations.html",
-			controller: "addCtrl",
+			controller: "calculationAddCtrl",
 			resolve: {
 				reports: "calculationsCollection"
 			},

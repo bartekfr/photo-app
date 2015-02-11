@@ -1,7 +1,7 @@
 angular.module("admin", [])
 .controller("adminCtrl", ["$scope", function ($scope) {
 }])
-.controller("addCtrl", ["$scope", "reports", function ($scope, reports) {
+.controller("reportAddCtrl", ["$scope", "reports", function ($scope, reports) {
 	$scope.report = {
 		data: [],
 		title: ""
@@ -11,7 +11,7 @@ angular.module("admin", [])
 		reports.save($scope.report);
 	};
 }])
-.controller("editCtrl", ["$scope", "report", "$state", "messenger", function ($scope, report, $state, messenger) {
+.controller("reportEditCtrl", ["$scope", "report", "$state", "messenger", function ($scope, report, $state, messenger) {
 	$scope.reportData = report.data;
 	$scope.title = report.title;
 	$scope.report = report;
@@ -29,4 +29,10 @@ angular.module("admin", [])
 			messenger.log("Report properties saved");
 		});
 	};
+}])
+.controller("calculationAddCtrl", ["$scope", "reports", function ($scope, reports) {
+
+}])
+.controller("calculationEditCtrl", ["$scope", "report", "$state", "messenger", function ($scope, report, $state, messenger) {
+
 }]);
