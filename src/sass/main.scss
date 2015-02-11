@@ -45,6 +45,10 @@ h2 {
 	}
 }
 
+.container {
+	position: relative;
+}
+
 .buttons {
 	float: none;
 	margin: 10px 0;
@@ -61,6 +65,17 @@ h2 {
 		top: 3px;
 		font-size: 17px;
 	}
+}
+
+.message {
+	position: fixed;
+	top: 30px;
+	left: 15px;
+	right: 15px;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	text-align: center;
 }
 
 /* Home page
