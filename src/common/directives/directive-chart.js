@@ -1,4 +1,4 @@
-angular.module("directives", [])
+angular.module("directives")
 .directive("chart", [function() {
 
 	function drawChart(element, data, options) {

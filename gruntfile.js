@@ -45,7 +45,7 @@ module.exports = function(grunt){
 			app: {
 				files: [
 					{src: "<%= src %>/app/**/*.js", dest: "<%= dist %>/js/app.min.js"},
-					{src: "<%= src %>/common/**/*.js", dest: "<%= dist %>/js/common.min.js"}
+					{src: ["<%= src %>/common/modules-init.js", "<%= src %>/common/**/*.js"], dest: "<%= dist %>/js/common.min.js"}
 				]
 			}
 		},

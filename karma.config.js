@@ -17,6 +17,7 @@ module.exports = function(config) {
 			'bower_components/angular-resource/angular-resource.min.js',
 			'bower_components/d3/d3.min.js',
 			'dist/tpl/**/*.html',
+			'src/common/modules-init.js',
 			'src/**/*.js',
 			'test/**/*.js'
 		],
