@@ -30,7 +30,7 @@ h2 {
 .loading {
 	position: relative;
 
-	.content:after {
+	&:after {
 		content: "Please wait...";
 		position: absolute;
 		top: 0;
@@ -70,12 +70,13 @@ h2 {
 .message {
 	position: fixed;
 	top: 30px;
-	left: 15px;
-	right: 15px;
+	left: 0;
+	right: 0;
 	padding: 10px;
 	background: rgba(0, 0, 0, 0.5);
 	color: #fff;
 	text-align: center;
+	z-index: 1;
 }
 
 /* Home page
