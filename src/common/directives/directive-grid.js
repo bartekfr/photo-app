@@ -12,7 +12,6 @@ angular.module("directives")
 			$scope.reportData = angular.copy($scope.report.data);
 			$scope.toUpdate = $scope.reportData;
 
-
 			$scope.$watch("editReport.$valid", function(value) {
 				$scope.canSave = value;
 			});
@@ -28,9 +27,11 @@ angular.module("directives")
 
 			$scope.addRow = function() {
 				$scope.editReport.$setDirty();
+				$scope.total =  $scope.reportData.length + 1;
 				$scope.reportData.push({
 					"month": "",
-					"value": 0
+					"value": 0,
+					"id": $scope.total
 				});
 			};
 

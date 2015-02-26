@@ -1,7 +1,7 @@
 ﻿<div>
 	<form novalidate class="data-grid form" name="editReport">
 		<div class="table-responsive">
-			<table class="table">
+			<table class="table editable">
 				<thead>
 					<tr>
 						<th>Month</th>
@@ -11,6 +11,9 @@
 				</thead>
 				<tbody>
 					<tr class="edit-row" ng-repeat="item in reportData">
+						<td class="id">
+							{{item.id}}
+						</td>
 						<td class="month">
 							<input class="input-sm" type="text" ng-model="item.month"/>
 						</td>

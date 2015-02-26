@@ -95,6 +95,25 @@ h2 {
 	}
 }
 
+.table:not(.editable) {
+	th {
+		cursor: pointer;
+		
+		&:after {
+			content: "\25BA";
+		}
+	}
+
+	.order:after {
+		content: "\25BC";
+	}
+
+	.order.up:after {
+		content: "\25B2";
+	}
+}
+
+
 
 /* admin
 ==================================================================== */
