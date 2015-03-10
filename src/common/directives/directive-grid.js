@@ -27,7 +27,12 @@ angular.module("directives")
 
 			$scope.addRow = function() {
 				$scope.editReport.$setDirty();
-				$scope.total =  $scope.reportData[$scope.reportData.length - 1].id + 1;
+				if($scope.reportData.length === 0) {
+					$scope.total = 1;
+				} else {
+					$scope.total =  $scope.reportData[$scope.reportData.length - 1].id + 1;	
+				}
+
 				$scope.reportData.push({
 					"month": "",
 					"value": 0,
