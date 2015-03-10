@@ -12,8 +12,8 @@ angular.module("directives")
 			$scope.reportData = angular.copy($scope.report.data);
 			$scope.toUpdate = $scope.reportData;
 
-			$scope.$watch("editReport.$valid", function(value) {
-				$scope.canSave = value;
+			$scope.$watchGroup(["editReport.$valid", "editReport.$dirty"], function(newValues) {
+				$scope.canSave = newValues[0] && newValues[1];
 			});
 
 			$scope.save = function() {
@@ -27,7 +27,7 @@ angular.module("directives")
 
 			$scope.addRow = function() {
 				$scope.editReport.$setDirty();
-				$scope.total =  $scope.reportData.length + 1;
+				$scope.total =  $scope.reportData[$scope.reportData.length - 1].id + 1;
 				$scope.reportData.push({
 					"month": "",
 					"value": 0,
