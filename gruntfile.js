@@ -5,6 +5,7 @@ module.exports = function(grunt){
 		pkg: grunt.file.readJSON("package.json"),
 		src: "src/",
 		dist: "dist",
+		bower: "bower_components/",
 		watch: {
 			csscommon: {
 				files: ["<%= src %>/sass/*.scss"],
@@ -41,6 +42,21 @@ module.exports = function(grunt){
 		uglify: {
 			options: {
 				//beautify: true
+				sourceMap: true
+			},
+			bower: {
+				files: [
+					{
+						src: [
+							"<%= bower %>/d3/d3.min.js",
+							"<%= bower %>/oauth-js/dist/oauth.js",
+							"<%= bower %>/angular/angular.js",
+							"<%= bower %>/angular-ui-router/release/angular-ui-router.min.js",
+							"<%= bower %>/angular-resource/angular-resource.min.js"
+						], 
+						dest: "<%= dist %>/js/vendors.min.js"
+					}
+				]		
 			},
 			app: {
 				files: [
