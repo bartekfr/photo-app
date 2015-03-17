@@ -54,8 +54,8 @@ describe('directives:grid', function() {
 	beforeEach(angular.mock.inject(function($compile, $rootScope) {
 		var linkingFn = $compile('<div grid source-data="report" update="reportData"></div>');
 		scope = $rootScope;
-		scope.report = {"title" : "My expenses report" , "data" : [ { "month" : "january" , "value" : 500}, { "month" : "february" , "value" : -33}, { "month" : "march" , "value" : 50}, { "month" : "april" , "value" : 122}, { "month" : "june" , "value" : 175}]};
-		scope.reportData= null;
+		scope.report = {"title" : "My expenses report" , "data" : [ { "month" : "january" , "value" : 300}, { "month" : "february" , "value" : -33}, { "month" : "march" , "value" : 50}, { "month" : "april" , "value" : 122}, { "month" : "june" , "value" : 175}]};
+		scope.reportData = null;
 		element = linkingFn(scope);
 		scope.$digest();
 		isolatedScope = element.isolateScope();
@@ -70,6 +70,39 @@ describe('directives:grid', function() {
 		isolatedScope.remove(0);
 		isolatedScope.$digest();
 		expect(element.find(".edit-row").length).toEqual(4);
+	});
+
+	it("Adds row", function() {
+		isolatedScope.addRow();
+		isolatedScope.$digest();
+		expect(element.find(".edit-row").length).toEqual(6);
+	});
+
+	it("On init form is pristine", function() {
+		expect(element.find(".form").hasClass("ng-pristine")).toBe(true);
+	});
+
+	it("After change form is dirty", function() {
+		isolatedScope.addRow();
+		isolatedScope.$digest();
+		expect(element.find(".form").hasClass("ng-dirty")).toBe(true);
+	});
+
+	it("After change form is dirty", function() {
+		var input = element.find(".month input").eq(0);
+		input.val("").trigger("input");
+		isolatedScope.$digest();
+		expect(element.find(".form").hasClass("ng-dirty")).toBe(true);
+	});
+
+	it("Before change save button is disabled ", function() {
+		expect(element.find("button[type='submit']").is(":disabled")).toBe(true);
+	});
+
+	it("After change save button is enabled ", function() {
+		isolatedScope.addRow();
+		isolatedScope.$digest();
+		expect(element.find("button[type='submit']").is(":disabled")).toBe(false);
 	});
 });
 
