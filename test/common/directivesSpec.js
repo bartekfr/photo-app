@@ -6,7 +6,7 @@ describe('directives:chart', function() {
 	beforeEach(angular.mock.inject(function($compile, $rootScope) {
 		var linkingFn = $compile('<chart class="chart" data-width="550" data-height="300" source-data="reportData"></chart>');
 		scope = $rootScope;
-		scope.reportData =  [ { "month" : "january" , "value" : 500}, { "month" : "february" , "value" : -33}, { "month" : "march" , "value" : 50}, { "month" : "april" , "value" : 122}, { "month" : "june" , "value" : 175}];
+		scope.reportData =  [{ "month" : "january" , "value" : 500}, { "month" : "february" , "value" : -33}, { "month" : "march" , "value" : 50}, { "month" : "april" , "value" : 122}, { "month" : "june" , "value" : 175}];
 		element = linkingFn(scope);
 		scope.$digest();
 		isolatedScope = element.isolateScope();

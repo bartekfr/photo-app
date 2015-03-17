@@ -32,7 +32,6 @@ describe('services:mongolab resources', function() {
 	}));
 
 	beforeEach(angular.mock.inject(function(reportsDbResource) {
-
 		responseData = reportsDbResource("reports").query();
 		backend.flush();
 	}));
