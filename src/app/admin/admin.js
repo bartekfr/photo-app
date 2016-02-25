@@ -15,23 +15,7 @@ angular.module("admin", [])
 	};
 }])
 .controller("reportEditCtrl", ["$scope", "report", "$state", "messenger", function ($scope, report, $state, messenger) {
-	$scope.reportData = report.data;
-	$scope.title = report.title;
 	$scope.report = report;
-
-	$scope.remove = function() {
-		report.$delete(function() {
-			$state.go("home");
-		});
-	};
-
-	$scope.saveProperties = function() {
-		report.title = $scope.title;
-		messenger.log("Sending request");
-		report.$update(function() {
-			messenger.log("Report properties saved");
-		});
-	};
 }])
 .controller("calculationAddCtrl", ["$scope", "reports", function ($scope, reports) {
 
